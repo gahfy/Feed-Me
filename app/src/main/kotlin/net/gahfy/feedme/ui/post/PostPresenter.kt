@@ -7,15 +7,17 @@ import io.reactivex.schedulers.Schedulers
 import net.gahfy.feedme.R
 import net.gahfy.feedme.base.BasePresenter
 import net.gahfy.feedme.network.PostApi
+import net.gahfy.presenterinjector.annotations.FinalPresenter
 import javax.inject.Inject
 
 /**
- * The Presenter that will present the Post view.
+ * The FinalPresenter that will present the Post view.
  * @param postView the Post view to be presented by the presenter
  * @property postApi the API interface implementation
  * @property context the context in which the application is running
  * @property subscription the subscription to the API call
  */
+@FinalPresenter
 class PostPresenter(postView: PostView) : BasePresenter<PostView>(postView) {
     @Inject
     lateinit var postApi: PostApi

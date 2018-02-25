@@ -4,7 +4,7 @@ import net.gahfy.feedme.injection.component.DaggerPresenterInjector
 import net.gahfy.feedme.injection.component.PresenterInjector
 import net.gahfy.feedme.injection.module.ContextModule
 import net.gahfy.feedme.injection.module.NetworkModule
-import net.gahfy.feedme.ui.post.PostPresenter
+import net.gahfy.presenterinjector.annotations.BasePresenter
 
 /**
  * Base presenter any presenter of the application must extend. It provides initial injections and
@@ -14,6 +14,7 @@ import net.gahfy.feedme.ui.post.PostPresenter
  * @property injector The injector used to inject required dependencies
  * @constructor Injects the required dependencies
  */
+@BasePresenter
 abstract class BasePresenter<out V : BaseView>(protected val view: V) {
     private val injector: PresenterInjector = DaggerPresenterInjector.builder().contextModule(ContextModule(view)).networkModule(NetworkModule).build()
 
@@ -35,8 +36,6 @@ abstract class BasePresenter<out V : BaseView>(protected val view: V) {
      * Injects the required dependencies
      */
     private fun inject() {
-        when (this) {
-            is PostPresenter -> injector.inject(this)
-        }
+        makeInjection(injector, this)
     }
 }

@@ -59,4 +59,8 @@ dependencies {
 
     // Data binding
     kapt "com.android.databinding:compiler:3.0.1"
+
+    // Presenter injector
+    compileOnly project(":PresenterInjectorAnnotations")
+    kapt project(":PresenterInjectorCompiler")
 }

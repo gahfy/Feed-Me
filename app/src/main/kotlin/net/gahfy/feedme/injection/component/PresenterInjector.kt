@@ -4,6 +4,7 @@ import dagger.Component
 import net.gahfy.feedme.injection.module.ContextModule
 import net.gahfy.feedme.injection.module.NetworkModule
 import net.gahfy.feedme.ui.post.PostPresenter
+import net.gahfy.presenterinjector.annotations.PresenterComponent
 import javax.inject.Singleton
 
 /**
@@ -11,6 +12,7 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(modules = [(ContextModule::class), (NetworkModule::class)])
+@PresenterComponent
 interface PresenterInjector {
     /**
      * Injects required dependencies into the specified PostPresenter.
