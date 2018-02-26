@@ -1,12 +1,12 @@
 package net.gahfy.feedme.ui.post
 
 import android.content.Context
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import net.gahfy.feedme.R
 import net.gahfy.feedme.base.BasePresenter
 import net.gahfy.feedme.network.PostApi
+import net.gahfy.feedme.utils.androidThread
+import net.gahfy.feedme.utils.ioThread
 import net.gahfy.presenterinjector.annotations.FinalPresenter
 import javax.inject.Inject
 
@@ -39,8 +39,8 @@ class PostPresenter(postView: PostView) : BasePresenter<PostView>(postView) {
         view.showLoading()
         subscription = postApi
                 .getPosts()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+                .observeOn(androidThread())
+                .subscribeOn(ioThread())
                 .doOnTerminate { view.hideLoading() }
                 .subscribe(
                         { postList -> view.updatePosts(postList) },

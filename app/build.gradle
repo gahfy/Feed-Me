@@ -29,6 +29,10 @@ android {
         test.java.srcDirs = ['src/test/kotlin']
         androidTest.java.srcDirs = ['src/androidTest/kotlin']
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 
@@ -63,4 +67,11 @@ dependencies {
     // Presenter injector
     compileOnly project(":PresenterInjectorAnnotations")
     kapt project(":PresenterInjectorCompiler")
+
+    // Mockito
+    testImplementation "org.mockito:mockito-core:2.15.0"
+
+    // Gson
+    testImplementation "com.google.code.gson:gson:2.8.2"
+
 }

@@ -2,9 +2,9 @@ package net.gahfy.feedme.injection.module
 
 import dagger.Module
 import dagger.Provides
-import io.reactivex.schedulers.Schedulers
 import net.gahfy.feedme.network.PostApi
 import net.gahfy.feedme.utils.BASE_URL
+import net.gahfy.feedme.utils.ioThread
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -38,7 +38,7 @@ object NetworkModule {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(ioThread()))
                 .build()
     }
 }
