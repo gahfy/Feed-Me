@@ -3,6 +3,7 @@ package net.gahfy.feedme.base
 import net.gahfy.feedme.injection.component.DaggerPresenterInjector
 import net.gahfy.feedme.injection.component.PresenterInjector
 import net.gahfy.feedme.injection.module.ContextModule
+import net.gahfy.feedme.injection.module.DaoModule
 import net.gahfy.feedme.injection.module.NetworkModule
 import net.gahfy.feedme.ui.post.PostPresenter
 
@@ -15,7 +16,11 @@ import net.gahfy.feedme.ui.post.PostPresenter
  * @constructor Injects the required dependencies
  */
 abstract class BasePresenter<out V : BaseView>(protected val view: V) {
-    private val injector: PresenterInjector = DaggerPresenterInjector.builder().contextModule(ContextModule(view)).networkModule(NetworkModule).build()
+    private val injector: PresenterInjector = DaggerPresenterInjector.builder()
+            .contextModule(ContextModule(view))
+            .networkModule(NetworkModule)
+            .daoModule(DaoModule)
+            .build()
 
     init {
         inject()
