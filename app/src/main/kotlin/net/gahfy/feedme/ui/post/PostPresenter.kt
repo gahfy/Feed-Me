@@ -1,5 +1,7 @@
 package net.gahfy.feedme.ui.post
 
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -26,7 +28,16 @@ class PostPresenter(postView: PostView) : BasePresenter<PostView>(postView) {
 
     private var subscription: Disposable? = null
 
+    private val mutablePostList: MutableLiveData<List<Post>> = MutableLiveData()
+
     override fun onViewCreated() {
+        val postListObserver = Observer<List<Post>> { postList ->
+            if (postList != null) {
+                view.updatePosts(postList)
+            }
+        }
+
+        mutablePostList.observe(view, postListObserver)
         loadPosts()
     }
 
@@ -42,7 +53,7 @@ class PostPresenter(postView: PostView) : BasePresenter<PostView>(postView) {
                 .subscribeOn(Schedulers.io())
                 .doOnTerminate { view.hideLoading() }
                 .subscribe(
-                        { postList -> view.updatePosts(postList) },
+                        { postList -> mutablePostList.value = postList },
                         { view.showError(R.string.unknown_error) }
                 )
     }
