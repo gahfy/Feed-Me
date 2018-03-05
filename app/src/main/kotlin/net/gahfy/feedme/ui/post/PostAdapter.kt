@@ -19,7 +19,7 @@ class PostAdapter(private val context: Context) : RecyclerView.Adapter<PostAdapt
      */
     private var posts: List<Post> = listOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PostViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         val binding: ItemPostBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_post, parent, false)
         return PostViewHolder(binding)
@@ -29,7 +29,7 @@ class PostAdapter(private val context: Context) : RecyclerView.Adapter<PostAdapt
         return posts.size
     }
 
-    override fun onBindViewHolder(holder: PostViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder?.bind(posts[position])
     }
 

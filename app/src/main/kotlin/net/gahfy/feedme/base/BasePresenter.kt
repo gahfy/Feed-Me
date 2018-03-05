@@ -3,6 +3,7 @@ package net.gahfy.feedme.base
 import net.gahfy.feedme.injection.component.DaggerPresenterInjector
 import net.gahfy.feedme.injection.component.PresenterInjector
 import net.gahfy.feedme.injection.module.ContextModule
+import net.gahfy.feedme.injection.module.DaoModule
 import net.gahfy.feedme.injection.module.NetworkModule
 import net.gahfy.feedme.ui.post.PostPresenter
 
@@ -20,6 +21,7 @@ abstract class BasePresenter<out V : BaseView>(protected val view: V) {
             .baseView(view)
             .contextModule(ContextModule)
             .networkModule(NetworkModule)
+            .daoModule(DaoModule)
             .build()
 
     init {

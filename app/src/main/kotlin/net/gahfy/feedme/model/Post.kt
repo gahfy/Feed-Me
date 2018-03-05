@@ -1,5 +1,8 @@
 package net.gahfy.feedme.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
 /**
  * Class which provides a model for post
  * @constructor Sets all properties of the post
@@ -8,4 +11,9 @@ package net.gahfy.feedme.model
  * @property title the title of the post
  * @property body the content of the post
  */
-data class Post(val userId: Int, val id: Int, val title: String, val body: String)
+@Entity
+data class Post(val userId: Int,
+                @PrimaryKey
+                val id: Int,
+                val title: String,
+                val body: String)
