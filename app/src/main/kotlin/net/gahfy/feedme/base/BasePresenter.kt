@@ -18,7 +18,7 @@ abstract class BasePresenter<out V : BaseView>(protected val view: V) {
     private val injector: PresenterInjector = DaggerPresenterInjector
             .builder()
             .baseView(view)
-            .contextModule(ContextModule())
+            .contextModule(ContextModule)
             .networkModule(NetworkModule)
             .build()
 
