@@ -15,7 +15,12 @@ import net.gahfy.feedme.ui.post.PostPresenter
  * @constructor Injects the required dependencies
  */
 abstract class BasePresenter<out V : BaseView>(protected val view: V) {
-    private val injector: PresenterInjector = DaggerPresenterInjector.builder().contextModule(ContextModule(view)).networkModule(NetworkModule).build()
+    private val injector: PresenterInjector = DaggerPresenterInjector
+            .builder()
+            .baseView(view)
+            .contextModule(ContextModule())
+            .networkModule(NetworkModule)
+            .build()
 
     init {
         inject()

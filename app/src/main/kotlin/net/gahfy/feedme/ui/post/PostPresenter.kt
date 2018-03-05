@@ -1,6 +1,5 @@
 package net.gahfy.feedme.ui.post
 
-import android.content.Context
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -13,15 +12,11 @@ import javax.inject.Inject
  * The Presenter that will present the Post view.
  * @param postView the Post view to be presented by the presenter
  * @property postApi the API interface implementation
- * @property context the context in which the application is running
  * @property subscription the subscription to the API call
  */
 class PostPresenter(postView: PostView) : BasePresenter<PostView>(postView) {
     @Inject
     lateinit var postApi: PostApi
-
-    @Inject
-    lateinit var context: Context
 
     private var subscription: Disposable? = null
 
@@ -42,7 +37,7 @@ class PostPresenter(postView: PostView) : BasePresenter<PostView>(postView) {
                 .doOnTerminate { view.hideLoading() }
                 .subscribe(
                         { postList -> view.updatePosts(postList) },
-                        { view.showError(context.getString(R.string.unknown_error)) }
+                        { view.showError(R.string.unknown_error) }
                 )
     }
 

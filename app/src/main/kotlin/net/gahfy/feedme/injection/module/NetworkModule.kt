@@ -2,13 +2,13 @@ package net.gahfy.feedme.injection.module
 
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import io.reactivex.schedulers.Schedulers
 import net.gahfy.feedme.network.PostApi
 import net.gahfy.feedme.utils.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
 
 /**
  * Module which provides all required dependencies about network
@@ -23,7 +23,7 @@ object NetworkModule {
      * @return the Post service implementation.
      */
     @Provides
-    @Singleton
+    @Reusable
     internal fun providePostApi(retrofit: Retrofit): PostApi {
         return retrofit.create(PostApi::class.java)
     }
@@ -33,7 +33,7 @@ object NetworkModule {
      * @return the Retrofit object
      */
     @Provides
-    @Singleton
+    @Reusable
     internal fun provideRetrofitInterface(): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)

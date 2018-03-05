@@ -1,5 +1,6 @@
 package net.gahfy.feedme.ui.post
 
+import android.support.annotation.StringRes
 import net.gahfy.feedme.base.BaseView
 import net.gahfy.feedme.model.Post
 
@@ -18,6 +19,14 @@ interface PostView : BaseView {
      * @param error the error to display in the view
      */
     fun showError(error: String)
+
+    /**
+     * Displays an error in the view
+     * @param errorResId the resource id of the error to display in the view
+     */
+    fun showError(@StringRes errorResId: Int) {
+        this.showError(getContext().getString(errorResId))
+    }
 
     /**
      * Displays the loading indicator of the view
